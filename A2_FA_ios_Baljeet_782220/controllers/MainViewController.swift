@@ -12,6 +12,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var searchBar : UISearchBar!
     var productArray : [Products] = []
+    var providerArray : [Providers] = []
+    var isProductSelected = true
     let context =
         (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     override func viewDidLoad() {
@@ -57,9 +59,15 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func addButton(_ sender: Any) {
+        
     }
     @IBAction func switchPressed(_ sender: UIButton) {
-        
+        if sender.title(for: .normal) == "Products"{
+            isProductSelected = true
+        }
+        else{
+            isProductSelected = false
+        }
     }
 }
 extension MainViewController : UISearchBarDelegate{
@@ -85,7 +93,13 @@ extension MainViewController : UISearchBarDelegate{
 }
 extension MainViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return productArray.count
+        if isProductSelected{
+            return productArray.count
+        }
+        else{
+            return providerArray.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
