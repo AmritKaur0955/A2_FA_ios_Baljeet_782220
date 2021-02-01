@@ -9,23 +9,23 @@
 /* Begin PBXBuildFile section */
 		B708010F25C7EBE300D4955B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B708010E25C7EBE300D4955B /* AppDelegate.swift */; };
 		B708011125C7EBE300D4955B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B708011025C7EBE300D4955B /* SceneDelegate.swift */; };
-		B708011325C7EBE300D4955B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B708011225C7EBE300D4955B /* ViewController.swift */; };
 		B708011625C7EBE300D4955B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B708011425C7EBE300D4955B /* Main.storyboard */; };
 		B708011925C7EBE300D4955B /* A2_FA_ios_Baljeet_782220.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B708011725C7EBE300D4955B /* A2_FA_ios_Baljeet_782220.xcdatamodeld */; };
 		B708011B25C7EBF000D4955B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B708011A25C7EBEF00D4955B /* Assets.xcassets */; };
 		B708011E25C7EBF000D4955B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B708011C25C7EBF000D4955B /* LaunchScreen.storyboard */; };
+		B708012825C7F7D300D4955B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B708012725C7F7D200D4955B /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B708010B25C7EBE300D4955B /* A2_FA_ios_Baljeet_782220.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = A2_FA_ios_Baljeet_782220.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B708010E25C7EBE300D4955B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B708011025C7EBE300D4955B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B708011225C7EBE300D4955B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B708011525C7EBE300D4955B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B708011825C7EBE300D4955B /* A2_FA_ios_Baljeet_782220.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = A2_FA_ios_Baljeet_782220.xcdatamodel; sourceTree = "<group>"; };
 		B708011A25C7EBEF00D4955B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B708011D25C7EBF000D4955B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B708011F25C7EBF000D4955B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B708012725C7F7D200D4955B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +60,12 @@
 			children = (
 				B708010E25C7EBE300D4955B /* AppDelegate.swift */,
 				B708011025C7EBE300D4955B /* SceneDelegate.swift */,
-				B708011225C7EBE300D4955B /* ViewController.swift */,
 				B708011425C7EBE300D4955B /* Main.storyboard */,
 				B708011A25C7EBEF00D4955B /* Assets.xcassets */,
 				B708011C25C7EBF000D4955B /* LaunchScreen.storyboard */,
 				B708011F25C7EBF000D4955B /* Info.plist */,
 				B708011725C7EBE300D4955B /* A2_FA_ios_Baljeet_782220.xcdatamodeld */,
+				B708012725C7F7D200D4955B /* MainViewController.swift */,
 			);
 			path = A2_FA_ios_Baljeet_782220;
 			sourceTree = "<group>";
@@ -140,10 +140,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B708011325C7EBE300D4955B /* ViewController.swift in Sources */,
 				B708010F25C7EBE300D4955B /* AppDelegate.swift in Sources */,
 				B708011925C7EBE300D4955B /* A2_FA_ios_Baljeet_782220.xcdatamodeld in Sources */,
 				B708011125C7EBE300D4955B /* SceneDelegate.swift in Sources */,
+				B708012825C7F7D300D4955B /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
