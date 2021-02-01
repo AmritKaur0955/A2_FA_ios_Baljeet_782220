@@ -7,7 +7,7 @@
 
 import UIKit
 import CoreData
-class ProductViewController: UITableViewController {
+class ProductViewController: UIViewController {
     let context =
             (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     @IBOutlet weak var id: UITextField!
@@ -15,10 +15,10 @@ class ProductViewController: UITableViewController {
     @IBOutlet weak var productDesc: UITextField!
     @IBOutlet weak var price: UITextField!
     @IBOutlet weak var txtProviderName: UITextField!
-    var selectedProduct : Products?
+    var product : Products?
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let pro = selectedProduct{
+        if let pro = product{
             id.text = pro.product_id
             productName.text = pro.product_name
             productDesc.text = pro.product_desc
@@ -30,7 +30,7 @@ class ProductViewController: UITableViewController {
 
     @IBAction func save(_ sender: Any) {
         let req : NSFetchRequest<Providers> = Providers.fetchRequest()
-        req.predicate = NSPredicate(format: "provider = '\(txtProviderName.text!)'")
+        req.predicate = NSPredicate(format: "provider_name = '\(txtProviderName.text!)'")
         let storeProvider = try! context.fetch(req)
         var provider : Providers!
         if storeProvider.count == 0{
@@ -40,7 +40,7 @@ class ProductViewController: UITableViewController {
         else{
              provider = storeProvider[0]
         }
-        if let pro = selectedProduct{
+        if let pro = product{
             pro.product_desc = productDesc.text
             pro.product_id = id.text
             pro.product_name = productName.text
@@ -56,23 +56,7 @@ class ProductViewController: UITableViewController {
             pro.provider = provider
         }
         try! context.save()
-        id.text = nil
-        productDesc.text = nil
-        productName.text = nil
-        price.text = nil
-        txtProviderName.text = nil
+        self.navigationController?.popViewController(animated: true)
     }
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 5
-    }
-
 
 }

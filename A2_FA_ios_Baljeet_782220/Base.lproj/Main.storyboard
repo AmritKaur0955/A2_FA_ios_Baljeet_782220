@@ -113,22 +113,27 @@
                         <outlet property="searchBar" destination="g6e-br-osn" id="C1o-bD-RTd"/>
                         <outlet property="tableView" destination="L0u-PN-dUP" id="cwY-Z6-jNy"/>
                         <segue destination="mk2-3J-x9d" kind="show" identifier="insertProduct" id="DeH-bB-fI7"/>
+                        <segue destination="mk2-3J-x9d" kind="show" identifier="showProducts" id="PYj-cn-hii"/>
+                        <segue destination="a7C-T0-VfP" kind="show" identifier="showProviders" id="FrC-Qn-CqU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g4C-8h-VDV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="616" y="15"/>
+            <point key="canvasLocation" x="446" y="241"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bWV-ko-QCM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sNO-Rm-Qri" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" backIndicatorImage="arrowshape.turn.up.backward.fill" catalog="system" id="ht2-fw-ccE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="ht2-fw-ccE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" systemColor="systemYellowColor"/>
                         <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" systemColor="systemYellowColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -223,14 +228,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lgL-AL-11r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1578" y="15"/>
+            <point key="canvasLocation" x="1390" y="-258"/>
         </scene>
         <!--Provider Product View Controller-->
         <scene sceneID="VrE-uo-Iap">
             <objects>
-                <tableViewController id="a7C-T0-VfP" customClass="ProviderProductViewController" customModule="A2_FA_iOS_Gagandeep_C0764922" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="a7C-T0-VfP" customClass="ProviderProductViewController" customModule="A2_FA_ios_Baljeet_782220" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Wtz-YJ-b3r">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -255,8 +260,10 @@
             <point key="canvasLocation" x="2559" y="-6"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="PYj-cn-hii"/>
+    </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrowshape.turn.up.backward.fill" catalog="system" width="128" height="106"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="note.text.badge.plus" catalog="system" width="128" height="108"/>
         <systemColor name="systemBackgroundColor">

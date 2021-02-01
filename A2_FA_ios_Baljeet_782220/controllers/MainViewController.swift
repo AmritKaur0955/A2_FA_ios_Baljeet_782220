@@ -18,6 +18,9 @@ class MainViewController: UIViewController {
         (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Products"
+    }
+    override func viewWillAppear(_ animated: Bool) {
         getAllProducts()
     }
     
@@ -27,11 +30,17 @@ class MainViewController: UIViewController {
         put10Products()
         tableView.reloadData()
     }
+    func getAllProviders(){
+        providerArray = []
+        providerArray = try! context.fetch(Providers.fetchRequest())
+        tableView.reloadData()
+    }
     func put10Products(){
-        let provider = Providers(context: context)
-        let provider2 = Providers(context: context)
+        
         
         if productArray.isEmpty{
+            let provider = Providers(context: context)
+            let provider2 = Providers(context: context)
             for i in 1...10{
                 let product  = Products(context: context)
                 product.product_desc = "drinking \(i)"
@@ -55,18 +64,57 @@ class MainViewController: UIViewController {
             try! context.save()
             getAllProducts()
         }
-       
+        
     }
     
     @IBAction func addButton(_ sender: Any) {
-        
+        if isProductSelected {
+            performSegue(withIdentifier: "insertProduct", sender: self)
+        }
+        else{
+            showInputDialog(title: "Enter New Provider",
+                            actionTitle: "Add",
+                            cancelTitle: "Cancel",
+                            inputPlaceholder: "Provider",
+                            inputKeyboardType: .default, actionHandler:
+                                { (input:String?) in
+                                    let req : NSFetchRequest<Providers> = Providers.fetchRequest()
+                                    req.predicate = NSPredicate(format: "provider_name = '\(input!)'")
+                                    let storeProvider = try! self.context.fetch(req)
+                                    if storeProvider.count == 0{
+                                        let provider = Providers(context: self.context)
+                                        provider.provider_name = input
+                                    }
+                                    try! self.context.save()
+                                    self.getAllProviders()
+                                    
+                                })
+            
+        }
     }
     @IBAction func switchPressed(_ sender: UIButton) {
         if sender.title(for: .normal) == "Products"{
             isProductSelected = true
+            getAllProducts()
+            self.title = "Products"
         }
         else{
             isProductSelected = false
+            getAllProviders()
+            self.title = "Providers"
+        }
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  sender is String{
+            if isProductSelected{
+                let vc = segue.destination as! ProductViewController
+                vc.product = productArray[tableView.indexPathForSelectedRow!.row]
+            }
+            else{
+                let vc = segue.destination as! ProviderProductViewController
+                vc.provider = providerArray[tableView.indexPathForSelectedRow!.row]
+            }
         }
     }
 }
@@ -104,11 +152,87 @@ extension MainViewController : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text =
-            productArray[indexPath.row].product_name
-        cell.detailTextLabel?.text = productArray[indexPath.row].provider?.provider_name
+        if isProductSelected{
+            cell.textLabel?.text =
+                productArray[indexPath.row].product_name
+            cell.detailTextLabel?.text = productArray[indexPath.row].provider?.provider_name
+        }
+        else{
+            cell.textLabel?.text =
+                providerArray[indexPath.row].provider_name
+            let req : NSFetchRequest<Products> = Products.fetchRequest()
+            let productz = try! context.fetch(req)
+            var count = 0
+            for pro in productz{
+                if pro.provider?.provider_name == providerArray[indexPath.row].provider_name{
+                    count = count + 1
+                }
+            }
+            cell.detailTextLabel?.text = count.description
+        }
+        
         return cell
     }
     
     
+}
+extension MainViewController : UITableViewDelegate{
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isProductSelected{
+            performSegue(withIdentifier: "showProducts", sender: "Main")
+        }
+        else{
+            performSegue(withIdentifier: "showProviders", sender: "Main")
+        }
+    }
+     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            if isProductSelected{
+                let objc = productArray[indexPath.row]
+                context.delete(objc)
+                try! context.save()
+                getAllProducts()
+            }
+            else{
+                for prod in productArray{
+                    if prod.provider?.provider_name == providerArray[indexPath.row].provider_name{
+                        context.delete(prod)
+                    }
+                }
+                context.delete(providerArray[indexPath.row])
+                try! context.save()
+                getAllProviders()
+            }
+            
+            
+            
+        }
+    }
+}
+extension UIViewController {
+    func showInputDialog(title:String? = nil,
+                         subtitle:String? = nil,
+                         actionTitle:String? = "Add",
+                         cancelTitle:String? = "Cancel",
+                         inputPlaceholder:String? = nil,
+                         inputKeyboardType:UIKeyboardType = UIKeyboardType.default,
+                         cancelHandler: ((UIAlertAction) -> Swift.Void)? = nil,
+                         actionHandler: ((_ text: String?) -> Void)? = nil) {
+        
+        let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
+        alert.addTextField { (textField:UITextField) in
+            textField.placeholder = inputPlaceholder
+            textField.keyboardType = inputKeyboardType
+        }
+        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { (action:UIAlertAction) in
+            guard let textField =  alert.textFields?.first else {
+                actionHandler?(nil)
+                return
+            }
+            actionHandler?(textField.text)
+        }))
+        alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel, handler: cancelHandler))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 }
